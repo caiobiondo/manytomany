@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from calc_raroc_py import views
 
 from drf_spectacular .views import SpectacularAPIView, SpectacularRedocView, SpectacularSwaggerView
 
 
 urlpatterns = [
     path('api/v1/', include('CalculatorIrarocAPI.urls')),
+    path('', views.index, name='index'),
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
     path('calc_raroc_py/', include('calc_raroc_py.api.urls')),
