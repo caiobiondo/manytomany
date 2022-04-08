@@ -1,0 +1,11 @@
+[Unit]
+Description=Django-Backend-Full
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/ubuntu/manytomany-master/manage.py runserver 0.0.0.0:9000
+
+[Install]
+WantedBy=multi-user.target
+
