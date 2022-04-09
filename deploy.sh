@@ -21,6 +21,7 @@ pip install drf-spectacular
 pip install allauth
 pip install django-allauth
 pip install django-filter
+pip install django-cors-headers
 python3 manage.py makemigrations
 python3 manage.py migrate
 
