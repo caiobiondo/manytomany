@@ -1,44 +1,22 @@
-name: CI/CD counter app
-
+name: GitHub Actions Demo
 on:
-  push:
-    branches: [ master ]
-
+  release:
+    types: [published]
 jobs:
-#First we will see the application build or not , then we will deploy in EC2
-  build:
+  Explore-GitHub-Actions:
     runs-on: ubuntu-latest
-    
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Build the docker_compose
-      run: docker-compose up -d --build
-      
-    - name: Buid the application
-      run: docker-compose exec -T counter_app npm run build
-
-  Deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-      - uses: actions/checkout@v2 
-      - name: Deploy in EC2
-        env:
-            PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY  }}
-            HOSTNAME : ${{ secrets.GCP_IP  }}
-            USER_NAME : ubuntu
-            
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-          
-            #Now we have got the access of EC2 and we will start the deploy .
-            cd /home/ubuntu/CounterApp &&
-            git checkout master &&
-            git fetch --all &&
-            git reset --hard origin/master &&
-            git pull origin master &&
-            docker-compose -f docker-compose.prod.yml up -d --build 
-          '
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: Debug version
+        id: Debug
+        run: echo ${{ steps.get_version.outputs.VERSION }}
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.GCP_IP }}
+          username: ubuntu
+          key: ${{ secrets.GCP_PRIVATE_KEY }}
+          port: 22
+          script: /bin/bash deploy.sh ${{ steps.get_version.outputs.
