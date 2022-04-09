@@ -29,6 +29,6 @@ sudo cp demo.service /etc/systemd/system/demo.service
 # reload configurations incase if service file has changed
 sudo systemctl daemon-reload
 # restart the service
-sudo systemctl restart demo.service
+sudo systemctl start demo.service
 # start of VM restart
 sudo systemctl enable demo.service
