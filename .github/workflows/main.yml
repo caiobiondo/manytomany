@@ -20,3 +20,4 @@ jobs:
           key: ${{ secrets.GCP_PRIVATE_KEY }}
           port: 22
           run : ls > testedaporra.txt
+          script: /usr/bin/bash deploy.sh ${{ steps.get_version.outputs.VERSION }}
