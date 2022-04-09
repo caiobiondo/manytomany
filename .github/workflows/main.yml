@@ -20,4 +20,4 @@ jobs:
             HOSTNAME : ${{ secrets.GCP_IP  }}
             USER_NAME : ubuntu
             
-        run: ./scripttestedep.sh
+        run: pwd
