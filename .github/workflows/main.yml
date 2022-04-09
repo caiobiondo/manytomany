@@ -4,7 +4,7 @@ on:
     types: [published]
 jobs:
   Explore-GitHub-Actions:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Get the version
         id: get_version
