@@ -13,17 +13,12 @@ jobs:
         id: Debug
         run: echo ${{ steps.get_version.outputs.VERSION }}
       - name: executing remote ssh commands using ssh key
-        uses: actions/checkout@v2
-      - name: Deploy in EC2
-        env:
-            PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY  }}
-            HOSTNAME : ${{ secrets.GCP_IP  }}
-            USER_NAME : ubuntu
-            
-        run: |
-          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
-          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
-          
-            #Now we have got the access of EC2 and we will start the deploy .
-            cd /home/ubuntu/
-            ./scripttestedep.sh
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.GCP_IP }}
+          username: ubuntu
+          key: ${{ secrets.GCP_PRIVATE_KEY }}
+          port: 22
+          #run : |
+           #sh ./.github/workflows/deploy.sh
+          run: ./scripttestedep.sh
