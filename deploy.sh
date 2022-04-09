@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/bash
 if [ "$1" == "" ]; then
     echo "Please enter version"
     exit 1
