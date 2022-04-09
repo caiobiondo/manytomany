@@ -13,7 +13,7 @@ jobs:
         id: Debug
         run: echo ${{ steps.get_version.outputs.VERSION }}
       - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
+        uses: caiofodao/ssh-action@master
         with:
           host: ${{ secrets.GCP_IP }}
           username: ubuntu
