@@ -12,7 +12,9 @@ echo "upgrading demo to v-${1}"
 wget https://github.com/caiobiondo/manytomany/archive/refs/heads/master.zip
 
 # unzip
+cd /home/ubuntu
 unzip master.zip
+rm master.zip
 cd manytomany-master/
 pip install -r requiriments.txt
 pip install drf-spectacular
@@ -27,6 +29,6 @@ sudo cp demo.service /etc/systemd/system/demo.service
 # reload configurations incase if service file has changed
 sudo systemctl daemon-reload
 # restart the service
-sudo systemctl restart pythondeploy.service
+sudo systemctl restart demo.service
 # start of VM restart
-sudo systemctl enable pythondeploy.service
+sudo systemctl enable demo.service
