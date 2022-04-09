@@ -23,9 +23,6 @@ pip install django-allauth
 pip install django-filter
 pip install django-cors-headers
 pip install pandas
-python manage.py makemigrations
-python manage.py migrate
-
 
 # Copy service file, incase if there are any changes
 sudo cp demo.service /etc/systemd/system/demo.service
