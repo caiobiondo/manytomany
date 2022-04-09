@@ -20,6 +20,7 @@ pip install -r requiriments.txt
 pip install drf-spectacular
 pip install allauth
 pip install django-allauth
+pip install django-filter
 python3 manage.py makemigrations
 python3 manage.py migrate
 
