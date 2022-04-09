@@ -20,4 +20,6 @@ jobs:
             HOSTNAME : ${{ secrets.GCP_IP  }}
             USER_NAME : ubuntu
             
-        run: pwd
+        run: |
+            pwd
+            ls
