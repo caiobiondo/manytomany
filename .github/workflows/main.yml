@@ -19,6 +19,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.GCP_PRIVATE_KEY }}
           port: 22
-          run : |
+          script : |
            sh ./.github/workflows/deploy.sh
           #script: /bin/sh .github/workflows/deploy.sh ${{ steps.get_version.outputs.VERSION }}
