@@ -23,8 +23,8 @@ pip install django-allauth
 pip install django-filter
 pip install django-cors-headers
 pip install pandas
-python3.6 manage.py makemigrations
-python3.6 manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 
 
 # Copy service file, incase if there are any changes
