@@ -19,4 +19,4 @@ jobs:
           username: ubuntu
           key: ${{ secrets.GCP_PRIVATE_KEY }}
           port: 22
-          script: sh .github/workflows/deploy.sh
+          script: sudo .github/workflows/deploy.sh
