@@ -22,6 +22,7 @@ pip install allauth
 pip install django-allauth
 pip install django-filter
 pip install django-cors-headers
+pip install pandas
 python3 manage.py makemigrations
 python3 manage.py migrate
 
