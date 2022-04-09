@@ -19,4 +19,4 @@ jobs:
           username: ubuntu
           key: ${{ secrets.GCP_PRIVATE_KEY }}
           port: 22
-          script: /bin/bash deploy.sh ${{ steps.get_version.outputs.
+          script: /usr/bin/bash deploy.sh ${{ steps.get_version.outputs.VERSION }}
