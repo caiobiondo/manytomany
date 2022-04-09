@@ -14,7 +14,7 @@ jobs:
         run: echo ${{ steps.get_version.outputs.VERSION }}
       - name: executing remote ssh commands using ssh key
         uses: actions/checkout@v2
-        name: Deploy in EC2
+      - name: Deploy in EC2
         env:
             PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY  }}
             HOSTNAME : ${{ secrets.GCP_IP  }}
