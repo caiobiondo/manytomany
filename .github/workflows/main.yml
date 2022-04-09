@@ -1,23 +1,34 @@
-name: GitHub Actions Demo
+name: CI/CD counter app
+
 on:
-  release:
-    types: [published]
+  push:
+    branches: [ master ]
+
 jobs:
-  Explore-GitHub-Actions:
-    runs-on: ubuntu-20.04
+#First we will see the application build or not , then we will deploy in EC2
+  build:
+    runs-on: ubuntu-latest
+    
     steps:
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      - name: Debug version
-        id: Debug
-        run: echo ${{ steps.get_version.outputs.VERSION }}
-      - name: executing remote ssh commands using ssh key
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.GCP_IP }}
-          username: ubuntu
-          key: ${{ secrets.GCP_PRIVATE_KEY }}
-          port: 22
-          run: |
-           ./deploy.sh
+    - uses: actions/checkout@v2
+    
+    - name: Build the docker_compose
+      run: docker-compose up -d --build
+      
+    - name: Buid the application
+      run: docker-compose exec -T counter_app npm run build
+
+  Deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2 
+      - name: Deploy in EC2
+        env:
+            PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY  }}
+            HOSTNAME : ${{ secrets.GCP_IP  }}
+            USER_NAME : ubuntu
+            
+        run: |
+         /bin/sh deploy.sh
